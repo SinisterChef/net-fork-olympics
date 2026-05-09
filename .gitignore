@@ -34,3 +34,7 @@ appsettings.Development.json
 
 # Claude Code
 .claude/memory/
+
+# Tailwind
+tools/tailwindcss.exe
+ForkOlympics.Web/wwwroot/app.css

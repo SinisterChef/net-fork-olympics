@@ -8,6 +8,10 @@
     <UserSecretsId>86bbb4bf-6e22-41ba-ba43-be44f638cfdb</UserSecretsId>
   </PropertyGroup>
 
+  <Target Name="BuildTailwind" BeforeTargets="Build">
+    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\tools\tailwindcss.exe&quot; -i CSS\app.css -o wwwroot\app.css" />
+  </Target>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.7">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
