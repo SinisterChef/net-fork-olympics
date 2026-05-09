@@ -1,6 +1,7 @@
 # Build results
 bin/
 obj/
+ForkOlympics.Website/obj/
 
 # Visual Studio
 .vs/
@@ -28,3 +29,5 @@ Migrations/*.Designer.cs
 
 # Environment files
 appsettings.Development.json
+.env
+.env.*
