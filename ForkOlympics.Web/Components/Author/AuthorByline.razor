@@ -1,4 +1,19 @@
-@using ForkOlympics.Web.Data
+<div class="flex items-center gap-3">
+    @if (!string.IsNullOrEmpty(Author.AvatarStorageKey))
+    {
+        <img src="@Author.AvatarStorageKey" alt="@Author.Name" class="w-8 h-8 rounded-full object-cover" />
+    }
+    <div class="text-sm text-zinc-500">
+        <span>By </span>
+        <a href="/authors/@Author.Slug" class="font-semibold text-zinc-700 hover:text-zinc-900 transition-colors">
+            @Author.Name
+        </a>
+        @if (PublishedAt.HasValue)
+        {
+            <span> · @PublishedAt.Value.ToString("MMMM d, yyyy")</span>
+        }
+    </div>
+</div>
 
 @code {
     [Parameter, EditorRequired] public Author Author { get; set; } = null!;

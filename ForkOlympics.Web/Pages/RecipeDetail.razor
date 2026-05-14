@@ -1,7 +1,68 @@
 @page "/recipes/{slug}"
+@inject RecipeService RecipeService
+@inject NavigationManager Nav
 
-<PageTitle>Fork Olympics</PageTitle>
+<PageTitle>@(contentItem?.Title ?? "Recipe") – Fork Olympics</PageTitle>
+
+@if (contentItem is null)
+{
+    <div class="max-w-4xl mx-auto px-4 py-16 text-center text-zinc-400">Loading...</div>
+}
+else
+{
+    var recipe = contentItem.Recipe!;
+    var heroImage = contentItem.MediaAssets.FirstOrDefault(m => m.Role == MediaRole.Hero);
+    var stepImages = contentItem.MediaAssets.Where(m => m.Role == MediaRole.Step);
+
+    <article class="max-w-4xl mx-auto px-4 py-10">
+
+        <RecipeHero ContentItem="contentItem" HeroImage="heroImage" />
+
+        @if (!string.IsNullOrEmpty(recipe.Headnote))
+        {
+            <p class="text-lg text-zinc-600 leading-relaxed mb-8 border-b border-zinc-100 pb-8">
+                @recipe.Headnote
+            </p>
+        }
+
+        @if (!string.IsNullOrEmpty(recipe.WhyItWorks))
+        {
+            <WhyItWorks Body="@recipe.WhyItWorks" />
+        }
+
+        <div class="grid md:grid-cols-2 gap-10 my-10 border-t border-zinc-100 pt-10">
+            <IngredientList Ingredients="recipe.Ingredients" />
+            <StepList Steps="recipe.Steps" StepImages="stepImages" />
+        </div>
+
+        @if (!string.IsNullOrEmpty(recipe.Backstory))
+        {
+            <div class="border-t border-zinc-100 pt-10 mt-10">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-6">
+                    The Story Behind This Recipe
+                </h2>
+                <div class="max-w-2xl space-y-4">
+                    @foreach (var paragraph in recipe.Backstory.Split("\n\n", StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        <p class="text-zinc-600 leading-relaxed">@paragraph</p>
+                    }
+                </div>
+            </div>
+        }
+
+    </article>
+}
 
 @code {
     [Parameter] public string Slug { get; set; } = "";
+
+    private ContentItem? contentItem;
+
+    protected override async Task OnInitializedAsync()
+    {
+        contentItem = await RecipeService.GetBySlugAsync(Slug);
+
+        if (contentItem is null)
+            Nav.NavigateTo("/not-found");
+    }
 }

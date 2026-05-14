@@ -1,3 +1,11 @@
+<div class="mb-4">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-zinc-400">@Title</h2>
+    @if (!string.IsNullOrEmpty(Subtitle))
+    {
+        <p class="mt-1 text-zinc-500 text-sm">@Subtitle</p>
+    }
+</div>
+
 @code {
     [Parameter, EditorRequired] public string Title { get; set; } = "";
     [Parameter] public string? Subtitle { get; set; }

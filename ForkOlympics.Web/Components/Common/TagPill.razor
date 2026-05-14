@@ -1,4 +1,8 @@
-@using ForkOlympics.Web.Data
+<a href="/recipes?tag=@Tag.Slug"
+   class="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide transition-colors
+          @(Active ? "bg-zinc-900 text-white" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200")">
+    @Tag.Name
+</a>
 
 @code {
     [Parameter, EditorRequired] public Tag Tag { get; set; } = null!;

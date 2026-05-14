@@ -1,3 +1,16 @@
+<div class="my-8 p-6 bg-amber-50 border-l-4 border-amber-400 rounded-r-lg">
+    <SectionHeader Title="Why It Works" />
+    <div class="space-y-3">
+        @foreach (var paragraph in Paragraphs)
+        {
+            <p class="text-sm text-zinc-700 leading-relaxed">@paragraph</p>
+        }
+    </div>
+</div>
+
 @code {
     [Parameter, EditorRequired] public string Body { get; set; } = "";
+
+    private IEnumerable<string> Paragraphs =>
+        Body.Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
 }
