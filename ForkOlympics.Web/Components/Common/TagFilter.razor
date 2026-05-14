@@ -1,0 +1,7 @@
+@using ForkOlympics.Web.Data
+
+@code {
+    [Parameter, EditorRequired] public IEnumerable<Tag> Tags { get; set; } = [];
+    [Parameter] public string? ActiveTagSlug { get; set; }
+    [Parameter] public EventCallback<string?> OnTagSelected { get; set; }
+}

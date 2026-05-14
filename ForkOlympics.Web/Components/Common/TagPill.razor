@@ -1,0 +1,7 @@
+@using ForkOlympics.Web.Data
+
+@code {
+    [Parameter, EditorRequired] public Tag Tag { get; set; } = null!;
+    [Parameter] public bool Active { get; set; }
+    [Parameter] public EventCallback<Tag> OnClick { get; set; }
+}
