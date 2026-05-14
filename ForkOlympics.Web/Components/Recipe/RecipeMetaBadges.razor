@@ -1,5 +1,41 @@
-@using ForkOlympics.Web.Data
+<div class="flex flex-wrap gap-4 text-sm text-zinc-600">
+    @if (!string.IsNullOrEmpty(Recipe.Yield))
+    {
+        <div class="flex flex-col">
+            <span class="text-xs font-bold uppercase tracking-widest text-zinc-400">Yield</span>
+            <span class="font-medium text-zinc-800">@Recipe.Yield</span>
+        </div>
+    }
+    @if (Recipe.PrepMinutes.HasValue)
+    {
+        <div class="flex flex-col">
+            <span class="text-xs font-bold uppercase tracking-widest text-zinc-400">Prep</span>
+            <span class="font-medium text-zinc-800">@FormatMinutes(Recipe.PrepMinutes.Value)</span>
+        </div>
+    }
+    @if (Recipe.CookMinutes.HasValue)
+    {
+        <div class="flex flex-col">
+            <span class="text-xs font-bold uppercase tracking-widest text-zinc-400">Cook</span>
+            <span class="font-medium text-zinc-800">@FormatMinutes(Recipe.CookMinutes.Value)</span>
+        </div>
+    }
+    @if (Recipe.TotalMinutes.HasValue)
+    {
+        <div class="flex flex-col">
+            <span class="text-xs font-bold uppercase tracking-widest text-zinc-400">Total</span>
+            <span class="font-medium text-zinc-800">@FormatMinutes(Recipe.TotalMinutes.Value)</span>
+        </div>
+    }
+</div>
 
 @code {
     [Parameter, EditorRequired] public Recipe Recipe { get; set; } = null!;
+
+    private static string FormatMinutes(int minutes) => minutes switch
+    {
+        < 60 => $"{minutes} min",
+        60   => "1 hr",
+        _    => $"{minutes / 60} hr {minutes % 60} min".TrimEnd('0', ' ', 'i', 'n').TrimEnd()
+    };
 }

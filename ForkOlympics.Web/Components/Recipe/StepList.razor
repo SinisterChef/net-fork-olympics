@@ -1,4 +1,48 @@
-@using ForkOlympics.Web.Data
+<div>
+    <SectionHeader Title="Instructions" />
+
+    <ol class="space-y-6">
+        @{
+            var stepNumber = 1;
+            string? currentSection = null;
+        }
+        @foreach (var step in Steps)
+        {
+            @if (step.SectionHeader != currentSection)
+            {
+                currentSection = step.SectionHeader;
+                @if (!string.IsNullOrEmpty(currentSection))
+                {
+                    <li class="list-none">
+                        <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-400 mt-4">@currentSection</h3>
+                    </li>
+                }
+            }
+
+            var image = StepImages.FirstOrDefault(m => m.StepId == step.Id);
+
+            <li class="flex gap-4">
+                <span class="flex-shrink-0 w-7 h-7 rounded-full bg-zinc-900 text-white text-xs font-bold flex items-center justify-center mt-0.5">
+                    @stepNumber
+                </span>
+                <div class="flex-1">
+                    <p class="text-sm text-zinc-700 leading-relaxed">@step.Body</p>
+                    @if (image is not null)
+                    {
+                        <img src="@image.StorageKey"
+                             alt="@(image.AltText ?? $"Step {stepNumber}")"
+                             class="mt-3 rounded-lg w-full object-cover" />
+                        @if (!string.IsNullOrEmpty(image.Caption))
+                        {
+                            <p class="text-xs text-zinc-400 mt-1 italic">@image.Caption</p>
+                        }
+                    }
+                </div>
+            </li>
+            stepNumber++;
+        }
+    </ol>
+</div>
 
 @code {
     [Parameter, EditorRequired] public IEnumerable<RecipeStep> Steps { get; set; } = [];

@@ -1,4 +1,44 @@
-@using ForkOlympics.Web.Data
+<div class="mb-8">
+    @{
+        var tags = ContentItem.ContentItemTags.Select(ct => ct.Tag).ToList();
+    }
+
+    @if (tags.Any())
+    {
+        <div class="flex flex-wrap gap-2 mb-4">
+            @foreach (var tag in tags)
+            {
+                <TagPill Tag="tag" />
+            }
+        </div>
+    }
+
+    <h1 class="text-4xl font-bold text-zinc-900 leading-tight mb-4">@ContentItem.Title</h1>
+
+    <div class="flex flex-col gap-3 mb-6">
+        <AuthorByline Author="ContentItem.Author" PublishedAt="ContentItem.PublishedAt" />
+        <RecipeMetaBadges Recipe="ContentItem.Recipe!" />
+    </div>
+
+    @if (HeroImage is not null)
+    {
+        <div class="w-full aspect-video rounded-lg overflow-hidden bg-zinc-100">
+            <img src="@HeroImage.StorageKey"
+                 alt="@(HeroImage.AltText ?? ContentItem.Title)"
+                 class="w-full h-full object-cover" />
+            @if (!string.IsNullOrEmpty(HeroImage.Caption))
+            {
+                <p class="text-xs text-zinc-400 mt-2 italic">@HeroImage.Caption</p>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="w-full aspect-video rounded-lg bg-zinc-100 flex items-center justify-center">
+            <span class="text-zinc-300 text-sm">No image yet</span>
+        </div>
+    }
+</div>
 
 @code {
     [Parameter, EditorRequired] public ContentItem ContentItem { get; set; } = null!;

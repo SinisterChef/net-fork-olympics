@@ -1,5 +1,36 @@
-@using ForkOlympics.Web.Data
+<div>
+    <SectionHeader Title="Ingredients" />
+
+    @foreach (var group in GroupedIngredients)
+    {
+        @if (!string.IsNullOrEmpty(group.Key))
+        {
+            <h3 class="text-sm font-semibold text-zinc-700 mt-4 mb-2">@group.Key</h3>
+        }
+
+        <ul class="space-y-2">
+            @foreach (var ingredient in group)
+            {
+                <li class="flex gap-2 text-sm text-zinc-700 border-b border-zinc-100 pb-2">
+                    <span class="font-medium text-zinc-900 min-w-[3rem]">
+                        @ingredient.Quantity@(ingredient.Unit is not null ? $" {ingredient.Unit}" : "")
+                    </span>
+                    <span>
+                        @ingredient.Name
+                        @if (!string.IsNullOrEmpty(ingredient.PrepNote))
+                        {
+                            <span class="text-zinc-400">, @ingredient.PrepNote</span>
+                        }
+                    </span>
+                </li>
+            }
+        </ul>
+    }
+</div>
 
 @code {
     [Parameter, EditorRequired] public IEnumerable<RecipeIngredient> Ingredients { get; set; } = [];
+
+    private IEnumerable<IGrouping<string?, RecipeIngredient>> GroupedIngredients =>
+        Ingredients.GroupBy(i => i.GroupLabel);
 }
