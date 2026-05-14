@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <Target Name="BuildTailwind" BeforeTargets="Build">
-    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\tools\tailwindcss.exe&quot; -i CSS\app.css -o wwwroot\app.css" />
+    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\tools\tailwindcss.exe&quot; -i Tailwind\app.css -o wwwroot\app.css" />
   </Target>
 
   <ItemGroup>

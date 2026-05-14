@@ -1,0 +1,6 @@
+@using ForkOlympics.Web.Data
+
+@code {
+    [Parameter, EditorRequired] public IEnumerable<RecipeStep> Steps { get; set; } = [];
+    [Parameter] public IEnumerable<MediaAsset> StepImages { get; set; } = [];
+}

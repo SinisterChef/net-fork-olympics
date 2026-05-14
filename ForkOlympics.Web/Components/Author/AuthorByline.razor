@@ -1,0 +1,6 @@
+@using ForkOlympics.Web.Data
+
+@code {
+    [Parameter, EditorRequired] public Author Author { get; set; } = null!;
+    [Parameter] public DateTime? PublishedAt { get; set; }
+}

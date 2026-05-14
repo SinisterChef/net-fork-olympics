@@ -1,0 +1,6 @@
+@using ForkOlympics.Web.Data
+
+@code {
+    [Parameter, EditorRequired] public ContentItem ContentItem { get; set; } = null!;
+    [Parameter] public MediaAsset? HeroImage { get; set; }
+}

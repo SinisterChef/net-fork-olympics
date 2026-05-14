@@ -1,0 +1,5 @@
+@using ForkOlympics.Web.Data
+
+@code {
+    [Parameter, EditorRequired] public IEnumerable<RecipeIngredient> Ingredients { get; set; } = [];
+}
