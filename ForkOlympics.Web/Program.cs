@@ -20,6 +20,12 @@ builder.Services.AddScoped<AuthorService>();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    await DataSeeder.SeedAsync(scope.ServiceProvider.GetRequiredService<ApplicationDbContext>());
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
