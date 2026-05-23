@@ -15,6 +15,7 @@ public static class DataSeeder
         {
             Name = "Captain Barnabas Wentworth III",
             Slug = "captain-barnabas-wentworth-iii",
+            Title = "Senior Culinary Privateer",
             Tagline = "Privateer. Nutritional Pioneer. Scurvy Survivor (Results Not Typical).",
             Bio = "Captain Barnabas Wentworth III has sailed the seven seas for forty years, raided seventeen merchant vessels, and contracted scurvy on nine separate occasions — each of which he insists was a different disease. He came to cooking late in life, after a physician (a seagull he had befriended) suggested he eat more citrus. He ignored this advice for eleven years. He has since made up for lost time.",
             CreatedAtUtc = DateTime.UtcNow
