@@ -1,0 +1,63 @@
+<div class="flex flex-col md:flex-row w-full md:h-[480px] overflow-hidden">
+
+    <div class="relative w-full md:w-[60%] aspect-video md:aspect-auto flex-shrink-0">
+        @if (!string.IsNullOrEmpty(ImageUrl))
+        {
+            <img src="@ImageUrl"
+                 alt="@(ImageAlt ?? Title)"
+                 class="w-full h-full object-cover" />
+        }
+        else
+        {
+            <div class="w-full h-full bg-zinc-700 flex items-center justify-center">
+                <span class="text-zinc-500 text-sm">No image</span>
+            </div>
+        }
+    </div>
+
+    <div class="flex-1 bg-zinc-900 flex items-center px-8 py-8 md:px-10 md:py-10">
+        <div class="max-w-sm">
+
+            @if (!string.IsNullOrEmpty(Label))
+            {
+                <p class="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-3">@Label</p>
+            }
+
+            <h2 class="text-3xl font-bold leading-tight text-white mb-4">@Title</h2>
+
+            @if (!string.IsNullOrEmpty(Description))
+            {
+                <p class="text-zinc-300 text-sm leading-relaxed mb-6">@Description</p>
+            }
+
+            @if (!string.IsNullOrEmpty(CtaText) && !string.IsNullOrEmpty(CtaHref))
+            {
+                <a href="@CtaHref"
+                   class="inline-block bg-white text-zinc-900 text-sm font-semibold px-5 py-2.5 hover:bg-zinc-100 transition-colors">
+                    @CtaText
+                </a>
+            }
+
+        </div>
+    </div>
+
+</div>
+
+@code {
+    [Parameter, EditorRequired] public string Title { get; set; } = "";
+
+    /// Optional eyebrow label above the title (e.g. "This Week's Best")
+    [Parameter] public string? Label { get; set; }
+
+    [Parameter] public string? Description { get; set; }
+
+    [Parameter] public string? ImageUrl { get; set; }
+
+    /// Alt text for the hero image; falls back to Title if omitted
+    [Parameter] public string? ImageAlt { get; set; }
+
+    /// Button label — both CtaText and CtaHref must be set for the button to render
+    [Parameter] public string? CtaText { get; set; }
+
+    [Parameter] public string? CtaHref { get; set; }
+}
