@@ -1,0 +1,93 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+        <a href="/" class="text-xl font-bold text-zinc-900 tracking-tight flex-shrink-0">
+            Fork Olympics
+        </a>
+
+        <nav aria-label="Main navigation" class="hidden md:flex items-center gap-8 ml-8">
+            <NavLink href="/recipes"
+                     class="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
+                     ActiveClass="text-zinc-900 underline underline-offset-4">
+                Recipes
+            </NavLink>
+            <NavLink href="/reviews"
+                     class="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
+                     ActiveClass="text-zinc-900 underline underline-offset-4">
+                Reviews
+            </NavLink>
+            <NavLink href="/community"
+                     class="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
+                     ActiveClass="text-zinc-900 underline underline-offset-4">
+                Community
+            </NavLink>
+            <NavLink href="/connect"
+                     class="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
+                     ActiveClass="text-zinc-900 underline underline-offset-4">
+                Connect
+            </NavLink>
+        </nav>
+
+        <button class="md:hidden flex items-center justify-center w-10 h-10 rounded text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 transition-colors cursor-pointer"
+                type="button"
+                aria-label="Toggle navigation menu"
+                aria-expanded="@_menuOpen"
+                aria-controls="mobile-menu"
+                @onclick="ToggleMenu">
+            @if (_menuOpen)
+            {
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            }
+            else
+            {
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            }
+        </button>
+
+    </div>
+</div>
+
+@if (_menuOpen)
+{
+    <nav id="mobile-menu"
+         aria-label="Mobile navigation"
+         class="md:hidden border-t border-zinc-100 bg-white px-4 py-3 flex flex-col gap-1">
+        <NavLink href="/recipes"
+                 class="block px-3 py-2 rounded text-sm font-medium text-zinc-700 hover:bg-zinc-50 transition-colors"
+                 ActiveClass="bg-zinc-100 text-zinc-900"
+                 @onclick="CloseMenu">
+            Recipes
+        </NavLink>
+        <NavLink href="/reviews"
+                 class="block px-3 py-2 rounded text-sm font-medium text-zinc-700 hover:bg-zinc-50 transition-colors"
+                 ActiveClass="bg-zinc-100 text-zinc-900"
+                 @onclick="CloseMenu">
+            Reviews
+        </NavLink>
+        <NavLink href="/community"
+                 class="block px-3 py-2 rounded text-sm font-medium text-zinc-700 hover:bg-zinc-50 transition-colors"
+                 ActiveClass="bg-zinc-100 text-zinc-900"
+                 @onclick="CloseMenu">
+            Community
+        </NavLink>
+        <NavLink href="/connect"
+                 class="block px-3 py-2 rounded text-sm font-medium text-zinc-700 hover:bg-zinc-50 transition-colors"
+                 ActiveClass="bg-zinc-100 text-zinc-900"
+                 @onclick="CloseMenu">
+            Connect
+        </NavLink>
+    </nav>
+}
+
+@code {
+    private bool _menuOpen;
+
+    private void ToggleMenu() => _menuOpen = !_menuOpen;
+    private void CloseMenu() => _menuOpen = false;
+}
