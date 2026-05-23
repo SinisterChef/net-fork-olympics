@@ -1,0 +1,84 @@
+@inject AuthorService AuthorService
+
+<section class="bg-cyan-50 py-14">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+        @* Section header with ruled lines *@
+        <div class="flex items-center gap-4 mb-10">
+            <div class="flex-1 border-t border-zinc-400"></div>
+            <h2 class="text-xs font-bold uppercase tracking-widest text-zinc-700 whitespace-nowrap">
+                Who We Are
+            </h2>
+            <div class="flex-1 border-t border-zinc-400"></div>
+        </div>
+
+        @if (_authors is null)
+        {
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                @for (int i = 0; i < 4; i++)
+                {
+                    <div class="flex items-center gap-4 animate-pulse">
+                        <div class="w-16 h-16 rounded-full bg-cyan-200 flex-shrink-0"></div>
+                        <div class="flex flex-col gap-2">
+                            <div class="h-4 w-32 bg-cyan-200 rounded"></div>
+                            <div class="h-3 w-24 bg-cyan-100 rounded"></div>
+                            <div class="h-3 w-20 bg-cyan-100 rounded"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
+                @foreach (var author in _authors)
+                {
+                    <a href="/authors/@author.Slug"
+                       class="flex items-center gap-4 group">
+
+                        @* Avatar *@
+                        @if (!string.IsNullOrEmpty(author.AvatarStorageKey))
+                        {
+                            <img src="@author.AvatarStorageKey"
+                                 alt="@author.Name"
+                                 class="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                        }
+                        else
+                        {
+                            <div class="w-16 h-16 rounded-full bg-cyan-200 flex items-center justify-center flex-shrink-0 text-cyan-800 font-bold text-lg">
+                                @Initials(author.Name)
+                            </div>
+                        }
+
+                        @* Text *@
+                        <div>
+                            <p class="font-bold text-zinc-900 group-hover:underline">@author.Name</p>
+                            @if (!string.IsNullOrEmpty(author.Title))
+                            {
+                                <p class="text-xs uppercase tracking-wider text-zinc-500 mt-0.5">@author.Title</p>
+                            }
+                            @if (!string.IsNullOrEmpty(author.Tagline))
+                            {
+                                <p class="text-xs uppercase tracking-wider text-zinc-500">@author.Tagline</p>
+                            }
+                        </div>
+
+                    </a>
+                }
+            </div>
+        }
+
+    </div>
+</section>
+
+@code {
+    private List<Author>? _authors;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _authors = await AuthorService.GetAllAsync();
+    }
+
+    private static string Initials(string name) =>
+        string.Concat(name.Split(' ').Where(w => w.Length > 0).Take(2).Select(w => w[0]));
+}
