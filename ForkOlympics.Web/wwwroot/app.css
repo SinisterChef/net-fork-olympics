@@ -9,7 +9,6 @@
     monospace;
     --color-amber-50: oklch(98.7% 0.022 95.277);
     --color-amber-400: oklch(82.8% 0.189 84.429);
-    --color-cyan-50: oklch(98.4% 0.019 200.873);
     --color-cyan-100: oklch(95.6% 0.045 203.388);
     --color-cyan-200: oklch(91.7% 0.08 205.041);
     --color-cyan-800: oklch(45% 0.085 224.283);
@@ -26,7 +25,6 @@
     --color-white: #fff;
     --spacing: 0.25rem;
     --container-sm: 24rem;
-    --container-2xl: 42rem;
     --container-4xl: 56rem;
     --container-7xl: 80rem;
     --text-xs: 0.75rem;
@@ -289,6 +287,9 @@
   .inline-block {
     display: inline-block;
   }
+  .inline-flex {
+    display: inline-flex;
+  }
   .table {
     display: table;
   }
@@ -321,6 +322,9 @@
   }
   .h-full {
     height: 100%;
+  }
+  .h-px {
+    height: 1px;
   }
   .min-h-screen {
     min-height: 100vh;
@@ -357,9 +361,6 @@
   }
   .w-full {
     width: 100%;
-  }
-  .max-w-2xl {
-    max-width: var(--container-2xl);
   }
   .max-w-4xl {
     max-width: var(--container-4xl);
@@ -516,11 +517,11 @@
   .border-zinc-800 {
     border-color: var(--color-zinc-800);
   }
+  .bg-\[\#1e3a5f\] {
+    background-color: #1e3a5f;
+  }
   .bg-amber-50 {
     background-color: var(--color-amber-50);
-  }
-  .bg-cyan-50 {
-    background-color: var(--color-cyan-50);
   }
   .bg-cyan-100 {
     background-color: var(--color-cyan-100);
@@ -533,6 +534,9 @@
   }
   .bg-zinc-100 {
     background-color: var(--color-zinc-100);
+  }
+  .bg-zinc-200 {
+    background-color: var(--color-zinc-200);
   }
   .bg-zinc-700 {
     background-color: var(--color-zinc-700);
@@ -557,6 +561,9 @@
   }
   .px-5 {
     padding-inline: calc(var(--spacing) * 5);
+  }
+  .px-6 {
+    padding-inline: calc(var(--spacing) * 6);
   }
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
@@ -711,6 +718,13 @@
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
         text-decoration-line: underline;
+      }
+    }
+  }
+  .hover\:bg-\[\#16304f\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #16304f;
       }
     }
   }

@@ -18,6 +18,8 @@ else
 
         <RecipeHero ContentItem="contentItem" HeroImage="heroImage" />
 
+        <JumpToRecipe />
+
         @if (!string.IsNullOrEmpty(recipe.Headnote))
         {
             <p class="text-lg text-zinc-600 leading-relaxed mb-8 border-b border-zinc-100 pb-8">
@@ -30,18 +32,13 @@ else
             <WhyItWorks Body="@recipe.WhyItWorks" />
         }
 
-        <div class="grid md:grid-cols-2 gap-10 my-10 border-t border-zinc-100 pt-10">
-            <IngredientList Ingredients="recipe.Ingredients" />
-            <StepList Steps="recipe.Steps" StepImages="stepImages" />
-        </div>
-
         @if (!string.IsNullOrEmpty(recipe.Backstory))
         {
             <div class="border-t border-zinc-100 pt-10 mt-10">
                 <h2 class="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-6">
                     The Story Behind This Recipe
                 </h2>
-                <div class="max-w-2xl space-y-4">
+                <div class="space-y-4">
                     @foreach (var paragraph in recipe.Backstory.Split("\n\n", StringSplitOptions.RemoveEmptyEntries))
                     {
                         <p class="text-zinc-600 leading-relaxed">@paragraph</p>
@@ -49,6 +46,11 @@ else
                 </div>
             </div>
         }
+
+        <div id="recipe" class="grid md:grid-cols-2 gap-10 my-10 border-t border-zinc-100 pt-10">
+            <IngredientList Ingredients="recipe.Ingredients" />
+            <StepList Steps="recipe.Steps" StepImages="stepImages" />
+        </div>
 
     </article>
 }
