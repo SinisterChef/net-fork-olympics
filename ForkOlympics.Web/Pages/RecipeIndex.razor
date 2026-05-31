@@ -1,3 +1,40 @@
 @page "/recipes"
+@inject RecipeService RecipeService
 
 <PageTitle>Recipes – Fork Olympics</PageTitle>
+
+<div class="max-w-7xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold text-zinc-900 mb-8">Recipes</h1>
+
+    @if (recipes is null)
+    {
+        <p class="text-zinc-400">Loading...</p>
+    }
+    else
+    {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach (var item in recipes)
+            {
+                var hero = item.MediaAssets.FirstOrDefault(m => m.Role == MediaRole.Hero);
+                var tags = item.ContentItemTags.Select(ct => ct.Tag).ToList();
+
+                <RecipeIndexCard Slug="@item.Slug"
+                                 HeroUrl="@(hero?.StorageKey ?? "")"
+                                 AltText="@(hero?.AltText ?? item.Title)"
+                                 Tags="@tags"
+                                 Title="@item.Title"
+                                 Author="@item.Author"
+                                 PublishedAt="@item.PublishedAt" />
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<ContentItem>? recipes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        recipes = await RecipeService.GetPublishedAsync();
+    }
+}
