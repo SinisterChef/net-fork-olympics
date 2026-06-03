@@ -4,16 +4,24 @@
 <PageTitle>Recipes – Fork Olympics</PageTitle>
 
 <div class="max-w-7xl mx-auto px-4 py-10">
-    <h1 class="text-3xl font-bold text-zinc-900 mb-8">Recipes</h1>
+    <h1 class="text-3xl font-bold text-zinc-900 mb-6">Recipes</h1>
+
+    <div class="mb-8">
+        <RecipeSearchBar OnSearchChanged="HandleSearchChanged" />
+    </div>
 
     @if (recipes is null)
     {
         <p class="text-zinc-400">Loading...</p>
     }
+    else if (!filteredRecipes.Any())
+    {
+        <p class="text-zinc-400">No recipes found for "@searchTerm".</p>
+    }
     else
     {
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach (var item in recipes)
+            @foreach (var item in filteredRecipes)
             {
                 var hero = item.MediaAssets.FirstOrDefault(m => m.Role == MediaRole.Hero);
                 var tags = item.ContentItemTags.Select(ct => ct.Tag).ToList();
@@ -32,9 +40,22 @@
 
 @code {
     private List<ContentItem>? recipes;
+    private string searchTerm = "";
+
+    private IEnumerable<ContentItem> filteredRecipes =>
+        string.IsNullOrWhiteSpace(searchTerm)
+            ? recipes ?? []
+            : (recipes ?? []).Where(r =>
+            r.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+            r.ContentItemTags.Any(ct => ct.Tag.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)));
 
     protected override async Task OnInitializedAsync()
     {
         recipes = await RecipeService.GetPublishedAsync();
+    }
+
+    private void HandleSearchChanged(string term)
+    {
+        searchTerm = term;
     }
 }

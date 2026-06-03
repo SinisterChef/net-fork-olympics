@@ -1,0 +1,27 @@
+<div class="relative w-full max-w-lg">
+    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+        <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+        </svg>
+    </div>
+    <input @bind="searchTerm"
+           @bind:event="oninput"
+           type="search"
+           placeholder="Search recipes or recipe categories..."
+           class="w-full rounded-xl border border-zinc-200 bg-white py-3 pl-11 pr-4 text-sm text-zinc-900 placeholder-zinc-400 shadow-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/30" />
+</div>
+
+@code {
+    [Parameter] public EventCallback<string> OnSearchChanged { get; set; }
+
+    private string _searchTerm = "";
+    private string searchTerm
+    {
+        get => _searchTerm;
+        set
+        {
+            _searchTerm = value;
+            OnSearchChanged.InvokeAsync(value);
+        }
+    }
+}
