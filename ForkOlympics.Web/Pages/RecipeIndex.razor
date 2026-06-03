@@ -39,6 +39,8 @@
 </div>
 
 @code {
+    [SupplyParameterFromQuery(Name = "tag")] public string? TagSlug { get; set; }
+
     private List<ContentItem>? recipes;
     private string searchTerm = "";
 
@@ -49,9 +51,9 @@
             r.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
             r.ContentItemTags.Any(ct => ct.Tag.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)));
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        recipes = await RecipeService.GetPublishedAsync();
+        recipes = await RecipeService.GetPublishedAsync(TagSlug);
     }
 
     private void HandleSearchChanged(string term)
