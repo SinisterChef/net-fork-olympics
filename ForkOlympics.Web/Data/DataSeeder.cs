@@ -22,44 +22,56 @@ public static class DataSeeder
         if (!existingSlugs.Contains("captain-barnabas-wentworth-iii"))
             toAdd.Add(new Author
             {
-                Name     = "Captain Barnabas Wentworth III",
-                Slug     = "captain-barnabas-wentworth-iii",
-                Title    = "Senior Culinary Privateer",
-                Tagline  = "Privateer. Nutritional Pioneer. Scurvy Survivor (Results Not Typical).",
-                Bio      = "Captain Barnabas Wentworth III has sailed the seven seas for forty years, raided seventeen merchant vessels, and contracted scurvy on nine separate occasions — each of which he insists was a different disease. He came to cooking late in life, after a physician (a seagull he had befriended) suggested he eat more citrus. He ignored this advice for eleven years. He has since made up for lost time.",
+                Name         = "Captain Barnabas Wentworth III",
+                Slug         = "captain-barnabas-wentworth-iii",
+                Title        = "Senior Culinary Privateer",
+                Tagline      = "Privateer. Nutritional Pioneer. Scurvy Survivor (Results Not Typical).",
+                Bio          = "Captain Barnabas Wentworth III has sailed the seven seas for forty years, raided seventeen merchant vessels, and contracted scurvy on nine separate occasions — each of which he insists was a different disease. He came to cooking late in life, after a physician (a seagull he had befriended) suggested he eat more citrus. He ignored this advice for eleven years. He has since made up for lost time.",
+                Education    = "Nine years aboard the HMS Perseverance under Captain Aldous Crick. One semester at the Lisbon Institute of Maritime Commerce, withdrawn after the incident with the harbormaster. The details of the incident are not relevant.",
+                Experience   = "Forty years at sea across seven oceans. Culinary career began in 1689 following the involuntary acquisition of a lemon shipment from a merchant vessel outside Seville. Has since reconsidered his position on citrus in a profound and medically significant way. Senior Culinary Privateer at Fork Olympics since 2024.",
+                IsGuestAuthor = false,
                 CreatedAtUtc = new DateTime(2024, 1, 15, 0, 0, 0, DateTimeKind.Utc)
             });
 
         if (!existingSlugs.Contains("barry-ursus"))
             toAdd.Add(new Author
             {
-                Name     = "Barry Ursus",
-                Slug     = "barry-ursus",
-                Title    = "Contributing Omnivore",
-                Tagline  = "Salmon. Honey. Berries. Sleep.",
-                Bio      = "Barry Ursus is a 640-pound black bear residing in the Cascade Range of Washington State. He has no formal culinary training but has been eating for eleven years and considers this sufficient. His approach to flavor is instinctual, seasonal, and largely driven by what is currently running upstream. Barry's articles feature rigorously tested recipes with precise technique and accurate food science. His backstory sections are a different matter.",
+                Name         = "Barry Ursus",
+                Slug         = "barry-ursus",
+                Title        = "Contributing Omnivore",
+                Tagline      = "Salmon. Honey. Berries. Sleep.",
+                Bio          = "Barry Ursus is a 640-pound black bear residing in the Cascade Range of Washington State. He has no formal culinary training but has been eating for eleven years and considers this sufficient. His approach to flavor is instinctual, seasonal, and largely driven by what is currently running upstream. Barry's articles feature rigorously tested recipes with precise technique and accurate food science. His backstory sections are a different matter.",
+                Education    = "Unstructured. Barry learned to forage, fish, and consume through eleven continuous years of field research in the Cascade Range. He considers this a more rigorous curriculum than most. He has also eaten a textbook. This was not intentional.",
+                Experience   = "Eleven years of independent nutritional fieldwork with a focus on seasonal protein acquisition, high-calorie preparation methods, and not being seen by hikers. Contributing Omnivore at Fork Olympics since 2024. His recipe testing process is instinctual, thorough, and occasionally involves sitting in a river for several hours.",
+                IsGuestAuthor = false,
                 CreatedAtUtc = new DateTime(2024, 3, 2, 0, 0, 0, DateTimeKind.Utc)
             });
 
         if (!existingSlugs.Contains("vladimir-putin"))
             toAdd.Add(new Author
             {
-                Name     = "Vladimir Putin",
-                Slug     = "vladimir-putin",
-                Title    = "President, Russian Federation. Also: Cook.",
-                Tagline  = "Strong nation. Stronger stock.",
-                Bio      = "Vladimir Putin has led the Russian Federation since 1999 and the Tuesday night dinner rotation at Novo-Ogaryovo since 2003. He approaches cooking the same way he approaches geopolitics: with patience, with conviction, and with a firm belief that anyone who uses pre-minced garlic from a jar is not to be trusted. His recipes skew heavily toward braised meats, root vegetables, and dishes that improve significantly after being left alone in a cold environment for several days. He will not be taking questions.",
+                Name         = "Vladimir Putin",
+                Slug         = "vladimir-putin",
+                Title        = "President, Russian Federation. Also: Cook.",
+                Tagline      = "Strong nation. Stronger stock.",
+                Bio          = "Vladimir Putin has led the Russian Federation since 1999 and the Tuesday night dinner rotation at Novo-Ogaryovo since 2003. He approaches cooking the same way he approaches geopolitics: with patience, with conviction, and with a firm belief that anyone who uses pre-minced garlic from a jar is not to be trusted. His recipes skew heavily toward braised meats, root vegetables, and dishes that improve significantly after being left alone in a cold environment for several days. He will not be taking questions.",
+                Education    = "Leningrad State University, Faculty of Law, 1975. Considers formal culinary education a symptom of softness. His grandmother taught him everything he needed to know at a kitchen table in Leningrad. He does not require a certificate to confirm this.",
+                Experience   = "President of the Russian Federation since 1999. Head of the Tuesday night dinner rotation at Novo-Ogaryovo since 2003. Has made pelmeni every winter since the age of seven. His approach to recipe development mirrors his approach to statecraft: methodical, cold-resistant, and not open to feedback.",
+                IsGuestAuthor = false,
                 CreatedAtUtc = new DateTime(2024, 5, 9, 0, 0, 0, DateTimeKind.Utc)
             });
 
         if (!existingSlugs.Contains("raphael-turtle"))
             toAdd.Add(new Author
             {
-                Name     = "Raphael Turtle",
-                Slug     = "raphael-turtle",
-                Title    = "Enforcer. Reluctant Chef.",
-                Tagline  = "I don't do delicate. I do flavor.",
-                Bio      = "Raphael has lived in the sewers beneath New York City his entire life and has strong opinions about this. He came to cooking not by choice but by necessity — Leonardo kept making the pasta wrong, Donatello was \"optimizing\" the sauce with a spreadsheet, and Michelangelo thought every meal should be pizza, which is correct but not sustainable. Raphael cooks with aggression and precision. His knife work is, by any objective measure, exceptional. He will not discuss where he learned it.",
+                Name         = "Raphael Turtle",
+                Slug         = "raphael-turtle",
+                Title        = "Enforcer. Reluctant Chef.",
+                Tagline      = "I don't do delicate. I do flavor.",
+                Bio          = "Raphael has lived in the sewers beneath New York City his entire life and has strong opinions about this. He came to cooking not by choice but by necessity — Leonardo kept making the pasta wrong, Donatello was \"optimizing\" the sauce with a spreadsheet, and Michelangelo thought every meal should be pizza, which is correct but not sustainable. Raphael cooks with aggression and precision. His knife work is, by any objective measure, exceptional. He will not discuss where he learned it.",
+                Education    = "Informal. Primarily self-taught under the constraints of sewer living and communal eating with three brothers who each had a different and incorrect opinion about food. Leonardo contributed unsolicited theory. Donatello contributed a spreadsheet. Michelangelo contributed enthusiasm without discipline. Raphael filtered these inputs and arrived at his own conclusions.",
+                Experience   = "Six months of daily pizza production before abandoning the delivery grate entirely. Prior experience spans seventeen years of eating whatever was available in the greater Manhattan storm drain system. Currently the only member of his household who can properly deglaze a pan, julienne a vegetable, or make a roux without reading about it first. His knife skills were developed through a parallel career he declines to elaborate on.",
+                IsGuestAuthor = false,
                 CreatedAtUtc = new DateTime(2024, 7, 18, 0, 0, 0, DateTimeKind.Utc)
             });
 
@@ -68,6 +80,35 @@ public static class DataSeeder
             db.Authors.AddRange(toAdd);
             await db.SaveChangesAsync();
         }
+
+        // Backfill new columns for authors already in the database
+        var existing = await db.Authors.Where(a => a.Education == null).ToListAsync();
+        foreach (var author in existing)
+        {
+            (author.Education, author.Experience) = author.Slug switch
+            {
+                "captain-barnabas-wentworth-iii" => (
+                    "Nine years aboard the HMS Perseverance under Captain Aldous Crick. One semester at the Lisbon Institute of Maritime Commerce, withdrawn after the incident with the harbormaster. The details of the incident are not relevant.",
+                    "Forty years at sea across seven oceans. Culinary career began in 1689 following the involuntary acquisition of a lemon shipment from a merchant vessel outside Seville. Has since reconsidered his position on citrus in a profound and medically significant way. Senior Culinary Privateer at Fork Olympics since 2024."
+                ),
+                "barry-ursus" => (
+                    "Unstructured. Barry learned to forage, fish, and consume through eleven continuous years of field research in the Cascade Range. He considers this a more rigorous curriculum than most. He has also eaten a textbook. This was not intentional.",
+                    "Eleven years of independent nutritional fieldwork with a focus on seasonal protein acquisition, high-calorie preparation methods, and not being seen by hikers. Contributing Omnivore at Fork Olympics since 2024. His recipe testing process is instinctual, thorough, and occasionally involves sitting in a river for several hours."
+                ),
+                "vladimir-putin" => (
+                    "Leningrad State University, Faculty of Law, 1975. Considers formal culinary education a symptom of softness. His grandmother taught him everything he needed to know at a kitchen table in Leningrad. He does not require a certificate to confirm this.",
+                    "President of the Russian Federation since 1999. Head of the Tuesday night dinner rotation at Novo-Ogaryovo since 2003. Has made pelmeni every winter since the age of seven. His approach to recipe development mirrors his approach to statecraft: methodical, cold-resistant, and not open to feedback."
+                ),
+                "raphael-turtle" => (
+                    "Informal. Primarily self-taught under the constraints of sewer living and communal eating with three brothers who each had a different and incorrect opinion about food. Leonardo contributed unsolicited theory. Donatello contributed a spreadsheet. Michelangelo contributed enthusiasm without discipline. Raphael filtered these inputs and arrived at his own conclusions.",
+                    "Six months of daily pizza production before abandoning the delivery grate entirely. Prior experience spans seventeen years of eating whatever was available in the greater Manhattan storm drain system. Currently the only member of his household who can properly deglaze a pan, julienne a vegetable, or make a roux without reading about it first. His knife skills were developed through a parallel career he declines to elaborate on."
+                ),
+                _ => (null, null)
+            };
+        }
+
+        if (existing.Count > 0)
+            await db.SaveChangesAsync();
     }
 
     private static async Task<Tag> GetOrCreateTagAsync(ApplicationDbContext db, string name, string slug)

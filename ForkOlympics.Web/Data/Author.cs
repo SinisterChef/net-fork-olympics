@@ -9,6 +9,9 @@ public class Author
     public string? Tagline { get; set; }
     public string? Bio { get; set; }
     public string? AvatarStorageKey { get; set; }
+    public string? Education { get; set; }
+    public string? Experience { get; set; }
+    public bool IsGuestAuthor { get; set; } = false;
     public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
 
     public ICollection<ContentItem> ContentItems { get; set; } = [];

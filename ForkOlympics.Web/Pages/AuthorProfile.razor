@@ -1,7 +1,124 @@
 @page "/authors/{slug}"
+@inject AuthorService AuthorService
 
-<PageTitle>Fork Olympics</PageTitle>
+@if (author is null)
+{
+    <PageTitle>Author – Fork Olympics</PageTitle>
+    <div class="max-w-3xl mx-auto px-4 py-20 text-center text-zinc-400">
+        @(notFound ? "Author not found." : "Loading...")
+    </div>
+}
+else
+{
+    <PageTitle>@author.Name – Fork Olympics</PageTitle>
+
+    @* Bio panel *@
+    <div class="bg-amber-50 border-b border-amber-100">
+        <div class="max-w-4xl mx-auto px-4 py-10">
+
+            @* Avatar + name row *@
+            <div class="flex flex-col sm:flex-row gap-6 items-start">
+                @if (!string.IsNullOrWhiteSpace(author.AvatarStorageKey))
+                {
+                    <img src="@author.AvatarStorageKey"
+                         alt="@author.Name"
+                         class="w-36 h-36 rounded object-cover flex-shrink-0 shadow-sm" />
+                }
+                else
+                {
+                    <div class="w-36 h-36 rounded bg-zinc-200 flex-shrink-0 flex items-center justify-center text-zinc-400 text-4xl font-bold">
+                        @author.Name[0]
+                    </div>
+                }
+
+                <div class="flex flex-col gap-1 pt-1">
+                    <h1 class="text-3xl font-bold text-zinc-900">@author.Name</h1>
+                    @if (!string.IsNullOrWhiteSpace(author.Tagline))
+                    {
+                        <p class="text-sm text-amber-700 italic">@author.Tagline</p>
+                    }
+                </div>
+            </div>
+
+            @* Meta fields *@
+            <div class="mt-6 space-y-1 text-sm text-zinc-700">
+                @if (!string.IsNullOrWhiteSpace(author.Title))
+                {
+                    <p><span class="font-semibold text-zinc-900">Title:</span> @author.Title</p>
+                }
+            </div>
+
+            @* Bio *@
+            @if (!string.IsNullOrWhiteSpace(author.Bio))
+            {
+                <div class="mt-5 text-sm text-zinc-700 leading-relaxed max-w-2xl">
+                    @foreach (var paragraph in author.Bio.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        <p class="mb-3">• @paragraph.Trim()</p>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    @* Experience / Education / Recipes *@
+    <div class="max-w-4xl mx-auto px-4 py-10 space-y-8">
+
+        @if (!string.IsNullOrWhiteSpace(author.Experience))
+        {
+            <section>
+                <h2 class="text-xl font-bold text-zinc-900 mb-2">Experience</h2>
+                <p class="text-sm text-zinc-700 leading-relaxed">@author.Experience</p>
+            </section>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(author.Education))
+        {
+            <section>
+                <h2 class="text-xl font-bold text-zinc-900 mb-2">Education</h2>
+                <p class="text-sm text-zinc-700 leading-relaxed">@author.Education</p>
+            </section>
+        }
+
+        @{
+            var recipes = author.ContentItems
+                .OrderByDescending(c => c.PublishedAt)
+                .ToList();
+        }
+
+        @if (recipes.Count > 0)
+        {
+            <section>
+                <h2 class="text-2xl font-bold text-zinc-900 mb-6">Latest from @author.Name</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    @foreach (var item in recipes)
+                    {
+                        var hero = item.MediaAssets.FirstOrDefault(m => m.Role == MediaRole.Hero);
+                        var tags = item.ContentItemTags.Select(ct => ct.Tag).ToList();
+
+                        <RecipeIndexCard Slug="@item.Slug"
+                                         HeroUrl="@(hero?.StorageKey ?? "")"
+                                         AltText="@(hero?.AltText ?? item.Title)"
+                                         Tags="@tags"
+                                         Title="@item.Title"
+                                         Author="@author"
+                                         PublishedAt="@item.PublishedAt" />
+                    }
+                </div>
+            </section>
+        }
+    </div>
+}
 
 @code {
     [Parameter] public string Slug { get; set; } = "";
+
+    private Author? author;
+    private bool notFound;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        author = await AuthorService.GetBySlugAsync(Slug);
+        notFound = author is null;
+    }
 }
