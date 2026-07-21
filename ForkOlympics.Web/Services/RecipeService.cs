@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ForkOlympics.Web.Services;
 
-public class RecipeService(ApplicationDbContext db)
+public class RecipeService(IDbContextFactory<ApplicationDbContext> dbFactory)
 {
-    public async Task<List<ContentItem>> GetPublishedAsync(string? tagSlug = null)
+    public async Task<List<ContentItem>> GetPublishedAsync(string? tagSlug = null, int? take = null)
     {
+        await using var db = await dbFactory.CreateDbContextAsync();
+
         var query = db.ContentItems
             .Include(c => c.Author)
             .Include(c => c.Recipe)
@@ -17,11 +19,17 @@ public class RecipeService(ApplicationDbContext db)
         if (tagSlug is not null)
             query = query.Where(c => c.ContentItemTags.Any(ct => ct.Tag.Slug == tagSlug));
 
-        return await query.OrderByDescending(c => c.PublishedAt).ToListAsync();
+        var ordered = query.OrderByDescending(c => c.PublishedAt);
+
+        return take is not null
+            ? await ordered.Take(take.Value).ToListAsync()
+            : await ordered.ToListAsync();
     }
 
     public async Task<ContentItem?> GetBySlugAsync(string slug)
     {
+        await using var db = await dbFactory.CreateDbContextAsync();
+
         return await db.ContentItems
             .Include(c => c.Author)
             .Include(c => c.Recipe)
