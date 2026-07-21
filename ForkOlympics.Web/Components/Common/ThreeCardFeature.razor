@@ -1,0 +1,68 @@
+@inject RecipeService RecipeService
+
+<section class="py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="flex items-center gap-4 mb-10">
+            <div class="flex-1 border-t border-zinc-400"></div>
+            <h2 class="text-xs font-bold uppercase tracking-widest text-zinc-700 whitespace-nowrap">
+                Latest Recipes
+            </h2>
+            <div class="flex-1 border-t border-zinc-400"></div>
+        </div>
+
+        @if (_recipes is null)
+        {
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @for (int i = 0; i < 3; i++)
+                {
+                    <div class="rounded-2xl overflow-hidden bg-white shadow-sm animate-pulse">
+                        <div class="aspect-[16/9] bg-zinc-200"></div>
+                        <div class="p-5 flex flex-col gap-3">
+                            <div class="flex gap-1.5">
+                                <div class="h-5 w-16 bg-zinc-200 rounded-full"></div>
+                                <div class="h-5 w-12 bg-zinc-200 rounded-full"></div>
+                            </div>
+                            <div class="h-6 w-3/4 bg-zinc-200 rounded"></div>
+                            <div class="h-4 w-1/2 bg-zinc-100 rounded mt-auto"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach (var item in _recipes)
+                {
+                    var hero = item.MediaAssets.FirstOrDefault(m => m.Role == MediaRole.Hero);
+                    var tags = item.ContentItemTags.Select(ct => ct.Tag).ToList();
+                    <RecipeIndexCard Slug="@item.Slug"
+                                     HeroUrl="@(hero?.StorageKey ?? "")"
+                                     AltText="@(hero?.AltText ?? item.Title)"
+                                     Tags="@tags"
+                                     Title="@item.Title"
+                                     Author="@item.Author"
+                                     PublishedAt="@item.PublishedAt" />
+                }
+            </div>
+
+            <div class="flex justify-end mt-6">
+                <a href="/recipes"
+                   class="text-sm font-semibold text-amber-700 hover:text-amber-900 transition-colors">
+                    View more &rarr;
+                </a>
+            </div>
+        }
+
+    </div>
+</section>
+
+@code {
+    private List<ContentItem>? _recipes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _recipes = await RecipeService.GetPublishedAsync(take: 3);
+    }
+}

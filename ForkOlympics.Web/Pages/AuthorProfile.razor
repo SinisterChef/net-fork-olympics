@@ -54,7 +54,7 @@ else
                 <div class="mt-5 text-sm text-zinc-700 leading-relaxed max-w-2xl">
                     @foreach (var paragraph in author.Bio.Split('\n', StringSplitOptions.RemoveEmptyEntries))
                     {
-                        <p class="mb-3">• @paragraph.Trim()</p>
+                        <p class="mb-3">@paragraph.Trim()</p>
                     }
                 </div>
             }
@@ -90,7 +90,7 @@ else
         {
             <section>
                 <h2 class="text-2xl font-bold text-zinc-900 mb-6">Latest from @author.Name</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach (var item in recipes)
                     {
                         var hero = item.MediaAssets.FirstOrDefault(m => m.Role == MediaRole.Hero);
