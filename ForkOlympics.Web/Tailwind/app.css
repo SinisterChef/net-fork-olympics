@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* ── Reserve scrollbar gutter so nav/layout width is consistent whether or
+   not a page's content is tall enough to scroll ───────────────────────── */
+html {
+    scrollbar-gutter: stable;
+}
+
 /* ── Blazor error UI (suppressed — triggered by VS Browser Link in dev) ── */
 #blazor-error-ui {
     display: none !important;
