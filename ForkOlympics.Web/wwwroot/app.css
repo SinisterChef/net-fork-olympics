@@ -1090,6 +1090,9 @@
     }
   }
 }
+html {
+  scrollbar-gutter: stable;
+}
 #blazor-error-ui {
   display: none !important;
 }
